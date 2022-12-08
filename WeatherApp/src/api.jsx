@@ -19,6 +19,7 @@ export const getWeather = () => {
     .then(res => {
       // handle success
       console.log(res);
+      
     })
     .catch(err => {
       // handle error
