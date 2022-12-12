@@ -1,14 +1,8 @@
 import './App.css'
 import { city } from './countries'
-import {Autocomplete, Card, CardActions, CardContent, TextField, Typography,} from '@mui/material'
+import {Autocomplete, TextField, Card, CardContent, CardActions, Typography} from '@mui/material'
 import { useState } from 'react'
 import axios from 'axios'
-
-
-
-
-
-
 
 
 function App() {
@@ -16,75 +10,50 @@ function App() {
   
   const [value, setValue] = useState(city[0]);
   const [inputValue, setInputValue] = useState('');
-  const [product,setProduct] = useState([]);
-  const [latlong,setLatlong] = useState([]);
-  const [weat,setWeat] = useState([]);
+  const [weathers,setWeathers] = useState('');
+  const [cards,setCards] = useState([]);
 
 
-  let longitude = latlong.map((long) => (long.lon));
-  let latitude = latlong.map((lati) => (lati.lat));
-
-  let icon = weat.map(ic => (ic.main.temp));
 
 
-console.log(weat);
-
-
-  const cardGen = () => {
-    geoWeather();
-    getWeather();
-
-    <Card sx={{ maxWidth: 200, ml: 20 }}>
-    <CardContent>
-      <Typography variant='h4'>{value}</Typography>
-      <Typography variant='h5'>{icon}</Typography>
-      <Typography varient='h5'>Weather</Typography>
-      <Typography variant='h6'>Icon</Typography>
-    </CardContent>
-    <CardActions>
-      <button>Description</button>
-    </CardActions>
-  </Card>
-  }
-
-
-  const geoWeather = () => {
-    axios.get(`http://api.openweathermap.org/geo/1.0/direct?q=${value.label}&limit=1&appid=a6b6506ac7618eab007596c9f741881d`)
-    .then(res => {
-      // handle success
-      console.log(res);
-      setLatlong(res.data);
+    const CardGen = () =>{
+      getWeather();
+      setCards([
+        ...cards,
       
-    })
-    .catch(err => {
-      // handle error
-      console.log(err);
-    })
+        <Card sx={{ maxWidth: 200, ml: 20 }}>
+        <CardContent>
+          <Typography variant='h4'>{value.label}</Typography>
+          <Typography variant='h5'>{weathers.main}</Typography>
+          <Typography varient='h5'>{weathers.weather.icon}</Typography>
+          <Typography variant='h6'>{weathers.weather.main}</Typography>
+        </CardContent>
+        <CardActions>
+          <button>Description</button>
+        </CardActions>
+        </Card>,
+      ])
+
   }
+
+ 
+
+
+
+
+
+console.log(weathers);
 
   const getWeather = () => {
-    axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=a6b6506ac7618eab007596c9f741881d`)
-    .then(res =>{
-      setWeat(res.data);
+    axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${value.label}&appid=05abf85529bfdb321b2ca9f97f52d0b8
+    `)
+      .then(res =>{
+      setWeathers(res.data);
+      console.log(res.data);
     })
-     
-
     .catch(error => {
       // handle error
       console.log(error);
-    })
-  }
-
-
-  
-  const dummyjson = () =>{
-    axios.get('https://dummyjson.com/products/')
-    .then(res => {
-      console.log(res);
-      setProduct(res.data?.products);
-    })
-    .catch(err => {
-      console.error(err);
     })
   }
 
@@ -105,7 +74,8 @@ console.log(weat);
         renderInput={(params) => <TextField {...params} label="city" />}
       />
       </div>
-        <button onClick={cardGen}>geoweather</button>
+        <button onClick={CardGen}>gdsjkf</button>
+        {cards}
     </div>
   )
 }

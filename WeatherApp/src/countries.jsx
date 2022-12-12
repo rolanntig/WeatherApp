@@ -134,7 +134,6 @@ export const city = [
    { label: "Honolulu"},
    { label: "Houston"},
    { label: "Hyderabad"},
-   { label: "Hyderabad"},
    { label: "Ibadan"},
    { label: "Incheon"},
    { label: "Isfahan"},
