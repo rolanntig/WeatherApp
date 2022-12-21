@@ -11,7 +11,6 @@ function App() {
   const [value, setValue] = useState(city[0]);
   const [inputValue, setInputValue] = useState('');
   const [cards,setCards] = useState([]);
-  const [expandedState, setExpandedState] = useState({});
   
 
   const CardGen = (id) => {
