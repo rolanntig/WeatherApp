@@ -9,3 +9,17 @@ h1{
   place-content:center;
 }
 
+.card{
+  display:inline-block;
+}
+
+.icons{
+  display:flex;
+  flex-direction: column;
+}
+
+body{
+  background-color:lightblue;
+}
+
+
